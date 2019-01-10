@@ -30,7 +30,7 @@
         <!--================Home Banner Area =================-->
         @yield('slider')
         <!--================End Home Banner Area =================-->
-        
+        @yield('content')
         <!--================Finance Area =================-->
         @yield('finance')
         <!--================End Finance Area =================-->

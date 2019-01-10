@@ -9,13 +9,13 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
     <!-- end: Mobile Specific -->
-    
+    <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
     <!-- start: CSS -->
     <link id="bootstrap-style" href="{{asset('backend/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('backend/css/bootstrap-responsive.min.css')}}" rel="stylesheet">
     <link id="base-style" href="{{asset('backend/css/style.css')}}" rel="stylesheet">
     <link id="base-style-responsive" href="{{asset('backend/css/style-responsive.css')}}" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;subset=latin,cyrillic-ext,latin-ext' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;subset=latin,cyrillic-ext,latin-ext' rel='stylesheet' type='text/css'>   
     <!-- end: CSS -->
     
 
@@ -40,36 +40,7 @@
 
 <body>
         <!-- start: Header -->
-    <div class="navbar">
-        <div class="navbar-inner">
-            <div class="container-fluid">
-                <a class="btn btn-navbar" data-toggle="collapse" data-target=".top-nav.nav-collapse,.sidebar-nav.nav-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </a>
-                <a class="brand" href="index.html"><span>Class Room</span></a>
-                                
-                <!-- start: Header Menu -->
-                <div class="nav-no-collapse header-nav">
-                    <ul class="nav pull-right">
-                       
-                        <!-- start: User Dropdown -->
-                        <li class="dropdown">
-                            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                                <i class="halflings-icon white user"></i> Łukasz Holeczek
-                                <span class="caret"></span>
-                            </a>
-                           
-                        </li>
-                        <!-- end: User Dropdown -->
-                    </ul>
-                </div>
-                <!-- end: Header Menu -->
-                
-            </div>
-        </div>
-    </div>
+    @include('layouts.backend.partials.topbar')
     <!-- start: Header -->
     
         <div class="container-fluid-full">
@@ -83,7 +54,7 @@
             <!-- start: Content -->
             <div id="content" class="span10">
             
-            
+            @yield('content')
                 
 
            </div>
@@ -100,7 +71,19 @@
    @include('layouts.backend.partials.footer')
     
     <!-- start: JavaScript-->
-
+    <script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+        <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+        {!! Toastr::message() !!}
+         <script>
+        @if($errors->any())
+            @foreach($errors->all() as $error)
+                toastr.error('{{$error}}','Error',{
+                    clseButton:true,
+                    progressBar:true
+                });
+            @endforeach
+        @endif
+    </script>
         <script src="{{asset('backend/js/jquery-1.9.1.min.js')}}"></script>
     <script src="{{asset('backend/js/jquery-migrate-1.0.0.min.js')}}"></script>
     
@@ -156,7 +139,7 @@
 
         <script src="{{asset('backend/js/custom.js')}}"></script>
     <!-- end: JavaScript-->
-    
+
 </body>
 
 <!-- Mirrored from bootstrapmaster.com/live/metro/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 08 Jan 2018 16:56:47 GMT -->

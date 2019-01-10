@@ -11,10 +11,29 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'FrontendController@welcome')->name('welcome');
+
+Route::get('about', 'FrontendController@about')->name('about');
+Route::get('contact', 'FrontendController@contact')->name('contact');
+Route::get('about', 'FrontendController@about')->name('about');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+
+// Admin Route Here...................................
+
+Route::group(['as'=>'admin.', 'prefix'=>'admin', 'namespace'=>'Admin', 'middleware'=>['auth', 'admin']], function(){
+
+	Route::get('dashboard', 'DashboardController@index')->name('dashboard');
+
+	 Route::resource('post', 'PostController');
+});
+
+// Stuents Route Here...................................
+
+Route::group(['as'=>'student.', 'prefix'=>'student', 'namespace'=>'Student', 'middleware'=>['auth', 'student']], function(){
+
+	Route::get('dashboard', 'DashboardController@index')->name('dashboard');
+
+	// Route::resource('post', 'PostController');
+});
