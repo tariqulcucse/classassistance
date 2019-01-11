@@ -37,3 +37,14 @@ Route::group(['as'=>'student.', 'prefix'=>'student', 'namespace'=>'Student', 'mi
 
 	// Route::resource('post', 'PostController');
 });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
