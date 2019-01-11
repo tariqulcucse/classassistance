@@ -27,6 +27,7 @@ Route::group(['as'=>'admin.', 'prefix'=>'admin', 'namespace'=>'Admin', 'middlewa
 	Route::get('dashboard', 'DashboardController@index')->name('dashboard');
 
 	 Route::resource('post', 'PostController');
+	 Route::resource('course', 'CourseController');
 });
 
 // Stuents Route Here...................................

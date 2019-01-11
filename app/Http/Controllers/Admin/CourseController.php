@@ -4,15 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Course;
 use App\Http\Controllers\Controller;
-use App\Post;
 use Brian2694\Toastr\Facades\Toastr;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
-use Intervention\Image\Facades\Image;
 
-class PostController extends Controller
+class CourseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -31,8 +26,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        $courses = Course::all();
-        return view('admin.post.create', compact('courses'));
+        return view('admin.course.create');
     }
 
     /**
@@ -43,47 +37,18 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-
         $this->validate($request, [
-            'title'=>'required|string|unique:posts',
-            'image'=>'required',
-            'body'=>'required',
-            'course' => 'required'
+            'name' => 'required|unique:courses',
         ]);
 
-        $image = $request->file('image');
-        $slug = str_slug($request->title);
+        $slug = str_slug($request->name);
 
-       if (isset($image)) {
+        $course = new Course();
+        $course->name = $request->name;
+        $course->slug = $slug;
+        $course->save();
 
-           $currentDate = Carbon::now()->toDateString();
-           $imageName = $slug.'-'.$currentDate.'-'.uniqid().'.'.$image->getClientOriginalExtension();
-
-
-               if (!Storage::disk('public')->exists('post')) {
-
-                   Storage::disk('public')->makeDirectory('post');
-               }
-
-               $postImage = Image::make($image)->resize(500,366)->stream();
-
-               Storage::disk('public')->put('post/'.$imageName, $postImage);
-
-       }else{
-            $imageName = 'default.png';
-        }
-
-        $post = new Post();
-        $post->user_id = Auth::id();
-        $post->title = $request->title;
-        $post->slug = $slug;
-        $post->image = $imageName;
-        $post->body = $request->body;
-        $post->save();
-
-        $post->courses()->attach($request->course);
-
-        Toastr::success('Your Post is Posted Successfully.','success');
+        Toastr::success('Course Added Successfully.', 'success');
         return redirect()->back();
     }
 

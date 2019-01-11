@@ -22,6 +22,19 @@
 								
 							  </div>
 							</div>
+
+							<div class="control-group">
+								<label class="control-label" for="selectError1">Course Name</label>
+								<div class="controls">
+								  <select id="selectError1" name="course[]" id="course" multiple data-rel="chosen">
+									 @foreach($courses as $course)
+                                        <option value="{{$course->id}}">{{$course->name}}</option>
+                                    @endforeach
+								  </select>
+								</div>
+							  </div>
+
+							
 							
 
 							<div class="control-group">
@@ -36,6 +49,9 @@
 								<textarea name="body" class="cleditor" id="textarea2" rows="3"></textarea>
 							  </div>
 							</div>
+
+							
+
 							<div class="form-actions">
 							  <button type="submit" class="btn btn-primary"> Post</button>
 							  <button type="reset" class="btn">Cancel</button>

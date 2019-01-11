@@ -7,7 +7,7 @@
                     @if(Request::is('admin*'))
                         <li><a href="{{route('admin.dashboard')}}"><i class="{{Request::is('admin/dashboard')? 'active':''}} icon-bar-chart"></i><span class="hidden-tablet"> Dashboard</span></a></li>   
                         <li><a href="{{route('admin.post.create')}}"><i class="icon-envelope"></i><span class="hidden-tablet"> Add Post</span></a></li>
-                        <li><a href="tasks.html"><i class="icon-tasks"></i><span class="hidden-tablet"> Courses</span></a></li>
+                        <li><a href="{{route('admin.course.create')}}"><i class="icon-tasks"></i><span class="hidden-tablet"> Courses</span></a></li>
                         <li><a href="ui.html"><i class="icon-eye-open"></i><span class="hidden-tablet"> Assignments</span></a></li>
                         <li><a href="widgets.html"><i class="icon-dashboard"></i><span class="hidden-tablet"> Attendents</span></a></li>
                         <li>
